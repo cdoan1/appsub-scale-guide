@@ -8,18 +8,18 @@ network_type="OVNKubernetes"
 
 generate_manifest_yamls() {
   
-  local yaml_dir="1k-scale-default"
+  local yaml_dir="10k-scale-default"
   mkdir -p "$yaml_dir/scale$1"
-  local cluster_name="scale-default"
+  local cluster_name="scale-default-10k"
 
   echo "====== Generating manifests for $cluster_name  ======"
   sed -e s/\{\{NAMESPACE\}\}/"$cluster_name"/g \
     -e s/\{\{INDEX\}\}/"$1"/g \
-    templates/cm-scale-default.template.yaml >"$yaml_dir"/scale$1/100-cm.yaml
+    templates/cm-scale-default-10k.template.yaml >"$yaml_dir"/scale$1/100-cm.yaml
 
 }
 
-for i in {1..1000}
+for i in {1..10000}
 do
   foo=$(printf "%05d" $i)
   generate_manifest_yamls "$foo"
