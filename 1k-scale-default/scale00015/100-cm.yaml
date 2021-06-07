@@ -1,0 +1,27 @@
+---
+kind: ConfigMap
+metadata:
+    name: perfprofile-policy-00015
+    namespace: scale-default
+data:
+    spec: |
+        additionalKernelArgs: []
+        cpu:
+            isolated: 2-19,22-39
+            reserved: 0-1,20-21
+        hugepages:
+            defaultHugepagesSize: 1G
+            pages:
+                - count: 32
+                size: 1G
+        machineConfigPoolSelector:
+            pools.operator.machineconfiguration.openshift.io/master: ""
+        net:
+            userLevelNetworking: true
+        nodeSelector:
+            node-role.kubernetes.io/master: ""
+        numa:
+            topologyPolicy: restricted
+        realTimeKernel:
+            enabled: true
+
