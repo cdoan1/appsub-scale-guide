@@ -18,8 +18,9 @@ test 1.1: 7 minutes to process 1 appsub that references 1k configmaps
 
 test 1.2: 106 minutes to process 1 appsub that references 5k configmaps
 
-test 1.3: (still running) 573 minutes at 9580 subscribed, multicluster-operators-application pod seeing OOMKilled
+test 1.3: 628 minutes to process 1 appsub that reference 10k configmaps (9994)
 
 
 * multicluster-operators-application restarts happening throughout the test run
+* OOMKilled seen in 10k run
 
