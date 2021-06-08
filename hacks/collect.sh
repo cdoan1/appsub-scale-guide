@@ -12,7 +12,7 @@ datestring() {
 # oc get appsub scale-test-app-5-subscription-1-local -n scale-test-app-5 -o jsonpath='{.status.statuses}' | jq . | grep lastUpdate | sort | tail -n 1
 # for app in scale-test-app-4-subscription-1-local
 
-for ns in scale-test-app-4 scale-test-app-5
+for ns in scale-test-app-4 scale-test-app-5 scale-test-app-6
 do
   app=$ns-subscription-1
   appl=$ns-subscription-1-local
