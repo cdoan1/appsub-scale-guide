@@ -1,0 +1,51 @@
+apiVersion: v1                    
+kind: Namespace
+metadata:
+  name: appsub-scale-test-1k3                             
+---
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: appsub-scale-test-1k3
+  namespace: appsub-scale-test-1k3
+spec:
+  componentKinds:
+  - group: apps.open-cluster-management.io
+    kind: Subscription
+  descriptor: {}
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values: 
+          - appsub-scale-test-1k3
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  annotations:
+    apps.open-cluster-management.io/git-branch: main
+    apps.open-cluster-management.io/git-path: 1k-scale-default-3
+    apps.open-cluster-management.io/reconcile-rate: 'off'
+  labels:
+    app: appsub-scale-test-1k3
+  name: appsub-scale-test-1k3-subscription-1
+  namespace: appsub-scale-test-1k3
+spec:
+  channel: ggithubcom-cdoan1-appsub-scale-guide-ns/ggithubcom-cdoan1-appsub-scale-guide
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: appsub-scale-test-1k3-placement-1
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+    app: appsub-scale-test-1k3
+  name: appsub-scale-test-1k3-placement-1
+  namespace: appsub-scale-test-1k3
+spec:
+  clusterSelector:
+    matchLabels:
+      'purpose': 'scale'
